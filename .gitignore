@@ -1,0 +1,71 @@
+# Dependencies and package manager caches
+node_modules/
+node_modules/.cache/
+.pnpm-store/
+.npm/
+.yarn/
+
+# Build outputs and tooling caches
+dist/
+.build/
+.cache/
+.vite/
+coverage/
+.vitest/
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.env
+*.env.*
+*.local
+*.secret
+*.key
+*.pem
+*.crt
+*.pfx
+*.cer
+*.der
+.npmrc
+*.npmrc
+.yarnrc
+*.yarnrc
+
+# Supabase local files that may contain service keys
+.supabase/
+supabase/.temp/
+supabase/.branches/
+supabase/.env
+supabase/config.toml
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE and editor metadata
+.vscode/
+.idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Miscellaneous
+*.tgz
+*.bak
+*.tmp
+*.orig
