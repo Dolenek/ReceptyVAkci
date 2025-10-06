@@ -58,23 +58,45 @@ export const IngredientList = ({ sections, servings }: IngredientListProps) => {
             <ul className="space-y-2">
               {section.items.map((item, index) => {
                 const key = section.id + '-' + index;
+                const isChecked = Boolean(checkedMap[key]);
                 const details = [item.quantity, item.notes].filter(Boolean).join(' - ');
                 return (
                   <li
                     key={key}
-                    className="flex items-start gap-2 rounded-lg bg-white/60 px-3 py-2 text-sm shadow-sm"
+                    className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm shadow-sm transition-all duration-200 ${
+                      isChecked ? 'bg-white/30 ring-1 ring-slate-200/70' : 'bg-white/60'
+                    }`}
                   >
                     <input
                       id={key}
                       type="checkbox"
-                      checked={Boolean(checkedMap[key])}
+                      checked={isChecked}
                       onChange={() => toggleItem(key)}
-                      className="mt-1 h-4 w-4 rounded border-slate-300 text-brand-dark focus:ring-brand-dark"
+                      className={`mt-1 h-4 w-4 rounded border-slate-300 text-brand-dark transition-transform duration-150 ease-out focus:ring-brand-dark ${
+                        isChecked ? 'scale-90' : 'scale-100'
+                      }`}
                     />
-                    <label htmlFor={key} className="flex-1 leading-snug">
-                      <span className="block font-medium text-slate-800">{item.name}</span>
+                    <label
+                      htmlFor={key}
+                      className={`flex-1 leading-snug transition-colors duration-200 ${
+                        isChecked ? 'text-slate-400' : ''
+                      }`}
+                    >
+                      <span
+                        className={`block font-medium transition-all duration-200 ${
+                          isChecked ? 'line-through text-slate-400' : 'text-slate-800'
+                        }`}
+                      >
+                        {item.name}
+                      </span>
                       {details ? (
-                        <span className="block text-xs text-slate-500">{details}</span>
+                        <span
+                          className={`block text-xs transition-colors duration-200 ${
+                            isChecked ? 'text-slate-300' : 'text-slate-500'
+                          }`}
+                        >
+                          {details}
+                        </span>
                       ) : null}
                     </label>
                   </li>
