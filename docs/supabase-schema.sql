@@ -1,4 +1,4 @@
--- Supabase schema for Kuchar v Akci recipes
+-- Supabase schema for Recepty v Akci recipes
 create table if not exists public.recipes (
   id uuid primary key default gen_random_uuid(),
   title text not null,

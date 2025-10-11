@@ -1,4 +1,4 @@
-Kuchar v Akci
+Recepty v Akci
 ============
 
 React and TypeScript web app that highlights the newest recipe and keeps an archive sorted by publish date. The layout mirrors the ingredient list and step flow from the provided reference image and connects to Supabase for data.

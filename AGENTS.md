@@ -3,7 +3,7 @@ AGENT HANDBOOK
 
 Purpose
 -------
-This document gives quick context for automation agents who need to extend or maintain the Kuchar v Akci frontend.
+This document gives quick context for automation agents who need to extend or maintain the Recepty v Akci frontend.
 
 Project Snapshot
 - Framework: React 18 with Vite and TypeScript located under src/.
