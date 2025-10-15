@@ -14,9 +14,21 @@ export const RecipeLayout = ({ recipe }: RecipeLayoutProps) => (
     <article className="flex-1 space-y-6">
       <header className="space-y-4">
         <div className="space-y-2">
-          <p className="text-sm uppercase tracking-wide text-slate-500">
-            {new Date(recipe.createdAt).toLocaleDateString()}
-          </p>
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-sm uppercase tracking-wide text-slate-500">
+              {new Date(recipe.createdAt).toLocaleDateString()}
+            </p>
+            {recipe.linkClickable ? (
+              <a
+                href={recipe.linkClickable}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-semibold uppercase tracking-wide text-brand-dark hover:underline"
+              >
+                letak
+              </a>
+            ) : null}
+          </div>
           <h1 className="text-3xl font-bold text-slate-900 lg:text-4xl">{recipe.title}</h1>
           {recipe.summary ? (
             <p className="text-lg text-slate-600">{recipe.summary}</p>

@@ -1,0 +1,70 @@
+{
+  "title": "Jablečný koláč s drobenkou",
+  "slug": "jablecny-kolac-s-drobenkou",
+  "summary": "Šťavnatý jablečný koláč s voňavou skořicí a křupavou drobenkou navrchu.",
+  "link_clickable": "https://example.com/letak/jablecny-kolac",
+  "ingredients": [
+    {
+      "id": "těsto",
+      "title": "Těsto",
+      "items": [
+        { "name": "Hladká mouka", "quantity": "300 g" },
+        { "name": "Studené máslo", "quantity": "150 g", "notes": "Nakrájené na kostky" },
+        { "name": "Krystalový cukr", "quantity": "80 g" },
+        { "name": "Vejce", "quantity": "1 ks" },
+        { "name": "Sůl", "quantity": "špetka" }
+      ]
+    },
+    {
+      "id": "náplň",
+      "title": "Jablečná náplň",
+      "items": [
+        { "name": "Jablka", "quantity": "5 ks", "notes": "Oloupaná, na plátky" },
+        { "name": "Třtinový cukr", "quantity": "60 g" },
+        { "name": "Skořice mletá", "quantity": "2 lžičky" },
+        { "name": "Citronová šťáva", "quantity": "1 lžíce" }
+      ]
+    },
+    {
+      "id": "drobenka",
+      "title": "Drobenka",
+      "items": [
+        { "name": "Hladká mouka", "quantity": "120 g" },
+        { "name": "Krystalový cukr", "quantity": "80 g" },
+        { "name": "Máslo", "quantity": "80 g", "notes": "Rozpuštěné" }
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "text": "Troubu předehřejte na 180 °C a formu o průměru 26 cm vyložte pečicím papírem."
+    },
+    {
+      "order": 2,
+      "text": "Z mouky, másla, cukru, vejce a špetky soli vypracujte hladké těsto, vtlačte ho do formy a vytvořte nízký okraj."
+    },
+    {
+      "order": 3,
+      "text": "Jablka promíchejte s cukrem, skořicí a citronovou šťávou a rozprostřete je na těsto."
+    },
+    {
+      "order": 4,
+      "text": "Drobenku připravte promícháním mouky, cukru a rozpuštěného másla a nasypte ji na jablka."
+    },
+    {
+      "order": 5,
+      "text": "Pečte 40 až 45 minut dozlatova. Podávejte vlažné nebo vychladlé.",
+      "resource": {
+        "label": "Video k receptu",
+        "url": "https://example.com/video/jablecny-kolac"
+      }
+    }
+  ],
+  "meta": {
+    "prepTimeMinutes": 30,
+    "cookTimeMinutes": 45,
+    "totalTimeMinutes": 90,
+    "servings": 10
+  }
+}

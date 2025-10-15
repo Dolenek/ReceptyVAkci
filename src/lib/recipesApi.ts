@@ -20,6 +20,7 @@ type RecipeRow = {
   hero_image_url?: string | null;
   created_at: string;
   updated_at?: string | null;
+  link_clickable?: string | null;
   ingredients: IngredientSection[] | null;
   steps: RecipeStep[] | null;
   meta?: Recipe['meta'];
@@ -33,6 +34,7 @@ const toRecipe = (row: RecipeRow): Recipe => ({
   heroImageUrl: row.hero_image_url ?? undefined,
   createdAt: row.created_at,
   updatedAt: row.updated_at ?? undefined,
+  linkClickable: row.link_clickable ?? undefined,
   ingredients: enrichSections(row.ingredients ?? []),
   steps: normaliseSteps(row.steps ?? []),
   meta: row.meta,
@@ -111,6 +113,7 @@ export const fetchRecipeArchive = async (page = 1): Promise<RecipeArchiveRespons
         summary: recipe.summary,
         heroImageUrl: recipe.heroImageUrl,
         createdAt: recipe.createdAt,
+        linkClickable: recipe.linkClickable,
       };
       return listItem;
     }),

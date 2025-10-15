@@ -16,9 +16,21 @@ export const RecipeCard = ({ recipe }: RecipeCardProps) => (
     ) : null}
     <div className="flex flex-1 flex-col gap-4 p-5">
       <div className="space-y-1">
-        <p className="text-xs uppercase tracking-wide text-slate-500">
-          {new Date(recipe.createdAt).toLocaleDateString()}
-        </p>
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-xs uppercase tracking-wide text-slate-500">
+            {new Date(recipe.createdAt).toLocaleDateString()}
+          </p>
+          {recipe.linkClickable ? (
+            <a
+              href={recipe.linkClickable}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-semibold uppercase tracking-wide text-brand-dark hover:underline"
+            >
+              letak
+            </a>
+          ) : null}
+        </div>
         <h3 className="text-xl font-semibold text-slate-900">{recipe.title}</h3>
         {recipe.summary ? <p className="text-sm text-slate-600">{recipe.summary}</p> : null}
       </div>

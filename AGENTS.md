@@ -28,8 +28,7 @@ Workflow Tips
 - Frontend data pipeline: `src/lib/recipesApi.ts` routes all recipe fetches, falling back to `src/lib/mockData.ts` when `isSupabaseConfigured` is false. Hooks in `src/hooks` expose query configs used by pages under `src/pages`.
 
 Supabase Ops Cheatsheet
-- `.env.example` is pre-filled with the anon key `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzYwMTI1ODQ2LCJleHAiOjIwNzU0ODU4NDZ9.teOAMH_LIRvjyjr2kzPnb1fX2StytrQCPwtD1aPKbro`; copy it to `.env` for local runs.
-- Supabase Docker project lives in `/root/supabase-project` on the infra machine accessed via SSH MCP (`10.0.0.188`). Use `docker compose up -d` there to ensure Kong/PostgREST are running.
+- Supabase Docker project lives in `/root/supabase-project` on the infra machine accessed via SSH MCP. Use `docker compose up -d` there to ensure Kong/PostgREST are running.
 - `docs/supabase-schema.sql` contains the `recipes` table definition plus a seed for `garden-herb-focaccia`, which should appear on the site when the stack is healthy.
 - The frontend logs `[recipesApi] Falling back to mock…` when Supabase is unreachable—watch the browser console to detect regressions quickly.
 

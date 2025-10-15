@@ -36,9 +36,13 @@ export interface Recipe {
   heroImageUrl?: string;
   createdAt: string;
   updatedAt?: string;
+  linkClickable?: string;
   ingredients: IngredientSection[];
   steps: RecipeStep[];
   meta?: RecipeSummary;
 }
 
-export type RecipeListItem = Pick<Recipe, 'id' | 'title' | 'slug' | 'createdAt' | 'summary' | 'heroImageUrl'>;
+export type RecipeListItem = Pick<
+  Recipe,
+  'id' | 'title' | 'slug' | 'createdAt' | 'summary' | 'heroImageUrl' | 'linkClickable'
+>;
