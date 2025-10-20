@@ -3,16 +3,10 @@ import type { IngredientSection } from '@/types/recipe';
 
 interface IngredientListProps {
   sections: IngredientSection[];
-  servings?: number;
 }
 
-export const IngredientList = ({ sections, servings }: IngredientListProps) => {
-  const [portionCount, setPortionCount] = useState<number>(servings ?? 1);
+export const IngredientList = ({ sections }: IngredientListProps) => {
   const [checkedMap, setCheckedMap] = useState<Record<string, boolean>>({});
-
-  const adjustPortion = (delta: number) => {
-    setPortionCount((prev) => Math.max(1, prev + delta));
-  };
 
   const toggleItem = (key: string) => {
     setCheckedMap((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -20,32 +14,8 @@ export const IngredientList = ({ sections, servings }: IngredientListProps) => {
 
   return (
     <aside className="sticky top-24 h-fit w-full max-w-xs rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur">
-      <header className="mb-6">
-        <p className="text-sm uppercase tracking-wide text-slate-500">Ingredience</p>
-        {servings ? (
-          <div className="mt-4 flex items-center justify-between rounded-xl bg-surface px-3 py-2">
-            <button
-              type="button"
-              onClick={() => adjustPortion(-1)}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg font-semibold text-slate-600 shadow"
-              aria-label="Snížit počet porcí"
-            >
-              -
-            </button>
-            <div className="text-center">
-              <p className="text-xs uppercase text-slate-500">Porce</p>
-              <p className="text-base font-semibold text-slate-800">{portionCount}</p>
-            </div>
-            <button
-              type="button"
-              onClick={() => adjustPortion(1)}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg font-semibold text-slate-600 shadow"
-              aria-label="Zvýšit počet porcí"
-            >
-              +
-            </button>
-          </div>
-        ) : null}
+      <header className="mb-6 text-center">
+        <p className="text-lg font-bold uppercase tracking-wide text-slate-600">Ingredience</p>
       </header>
       <div className="space-y-6">
         {sections.map((section) => (

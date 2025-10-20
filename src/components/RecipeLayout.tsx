@@ -9,7 +9,7 @@ interface RecipeLayoutProps {
 export const RecipeLayout = ({ recipe }: RecipeLayoutProps) => (
   <div className="flex w-full flex-col gap-8 lg:flex-row">
     <div className="lg:w-72 xl:w-80">
-      <IngredientList sections={recipe.ingredients} servings={recipe.meta?.servings} />
+      <IngredientList sections={recipe.ingredients} />
     </div>
     <article className="flex-1 space-y-6">
       <header className="space-y-4">
@@ -35,11 +35,13 @@ export const RecipeLayout = ({ recipe }: RecipeLayoutProps) => (
           ) : null}
         </div>
         {recipe.heroImageUrl ? (
-          <img
-            src={recipe.heroImageUrl}
-            alt={recipe.title}
-            className="h-72 w-full rounded-3xl object-cover shadow-lg"
-          />
+          <div className="mx-auto flex w-fit justify-center overflow-hidden rounded-3xl border border-slate-200 shadow-lg">
+            <img
+              src={recipe.heroImageUrl}
+              alt={recipe.title}
+              className="max-h-80 max-w-full object-contain"
+            />
+          </div>
         ) : null}
         {recipe.meta ? <RecipeMeta meta={recipe.meta} /> : null}
       </header>

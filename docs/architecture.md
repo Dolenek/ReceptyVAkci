@@ -26,8 +26,9 @@ Supabase Expectations
 
 Component Composition
 - AppLayout renders the header and outlet shell with responsive container constraints.
-- RecipeLayout pairs IngredientList and RecipeSteps to reproduce the provided UI reference.
-- IngredientList manages local checkbox state and optional serving multiplier for quick shopping prep.
+- RecipeLayout pairs IngredientList and RecipeSteps to reproduce the provided UI reference, including the centered hero imagery with a bounded frame.
+- IngredientList manages local checkbox state with a centered heading and strikes items through as they are checked.
+- RecipeSteps mirrors the ingredient checklist so completed steps are crossed out for quick progress tracking.
 - RecipeCard summarises a recipe inside the archive grid and links to the detail route.
 
 Testing Strategy
