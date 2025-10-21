@@ -35,7 +35,7 @@ export const RecipeDetailPage = () => {
   }
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-4">
       <Link to="/recipes" className="inline-flex items-center gap-2 text-sm font-semibold text-brand-dark hover:underline">
         <span aria-hidden="true">←</span>
         <span>Zpět do archivu</span>

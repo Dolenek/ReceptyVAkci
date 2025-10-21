@@ -17,10 +17,7 @@ export const RecipeLayout = ({ recipe }: RecipeLayoutProps) => {
 
   return (
     <div className="flex w-full flex-col gap-8 lg:flex-row">
-      <div className="lg:w-72 xl:w-80">
-        <IngredientList sections={recipe.ingredients} />
-      </div>
-      <article className="flex-1 space-y-6">
+      <article className="order-1 flex-1 space-y-6 lg:order-2">
         <header className="space-y-4">
           <div className="space-y-2">
             <div className="flex items-center justify-between gap-3">
@@ -54,11 +51,17 @@ export const RecipeLayout = ({ recipe }: RecipeLayoutProps) => {
           ) : null}
           {recipe.meta ? <RecipeMeta meta={recipe.meta} /> : null}
         </header>
+        <div className="lg:hidden">
+          <IngredientList sections={recipe.ingredients} />
+        </div>
         <section aria-label="Preparation steps">
           <h2 className="mb-4 text-xl font-semibold text-slate-800">Postup přípravy</h2>
           <RecipeSteps steps={recipe.steps} />
         </section>
       </article>
+      <aside className="hidden lg:order-1 lg:block lg:w-72 xl:w-80">
+        <IngredientList sections={recipe.ingredients} />
+      </aside>
     </div>
   );
 };

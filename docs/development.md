@@ -35,3 +35,8 @@ Live data checklist
 - UI entry points: `src/pages/LatestRecipePage.tsx` renders the latest recipe via `RecipeLayout`, while `src/pages/RecipeArchivePage.tsx` and `src/pages/RecipeDetailPage.tsx` surface the archive grid and slug-based details.
 - Use `curl "https://supabase.jakubdolenek.xyz/rest/v1/recipes?select=title,slug" -H "apikey: $VITE_SUPABASE_ANON_KEY"` to confirm the Supabase REST layer responds before debugging the frontend.
 - Promotion window: when recipes expose `start_akce` and `konec_akce`, the frontend maps them to `promotionStartDate` and `promotionEndDate` for display. Keep `src/lib/mockData.ts` and the Supabase schema aligned when you change these columns. The latest recipe view picks a random recipe whose window covers the current date, so define both timestamps for every active promotion.
+
+UI Notes
+- On screens below the `lg` breakpoint the ingredient list now renders beneath the hero/meta block to prioritise context before the checklist. Desktop keeps the left-rail layout.
+- Each preparation step can be toggled complete by clicking anywhere within the card, not only the `Hotovo` control.
+- Ingredient rows are full-width toggles as well; tapping anywhere on a row toggles the checkbox, and the entire list centers on small screens for easier access.
