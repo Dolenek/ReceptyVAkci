@@ -34,7 +34,7 @@ This document gives quick context for automation agents who need to extend or ma
 Project Snapshot
 - Framework: React 18 with Vite and TypeScript located under src/.
 - Styling: Tailwind CSS, theme surface colors defined in tailwind.config.ts.
-- Data: Supabase via src/lib/supabaseClient.ts, with mock fallbacks for offline work. Dev stack lives on `http://10.0.0.188:8000`.
+- Data: Supabase via src/lib/supabaseClient.ts, with mock fallbacks for offline work. Dev stack lives on `https://supabase.jakubdolenek.xyz`.
 - Routing: React Router with pages in src/pages/ and layout components in src/components/.
 - Testing: Vitest and Testing Library; helper renderer lives in src/test/testUtils.tsx.
 

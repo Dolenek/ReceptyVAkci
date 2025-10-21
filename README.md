@@ -44,7 +44,7 @@ Behind the scenes a self-hosted n8n instance orchestrates a daily content pipeli
 ## Getting Started
 ### Prerequisites
 - Node.js 18+ and npm (or another Node package manager).
-- Access to the Supabase instance at `http://10.0.0.188:8000` or your own Supabase credentials.
+- Access to the Supabase instance at `https://supabase.jakubdolenek.xyz` or your own Supabase credentials.
 
 ### Setup
 1. Copy `.env.example` to `.env`. The defaults target the shared Supabase stack; adjust only if you run a different backend.

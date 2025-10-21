@@ -1,57 +1,67 @@
 import { IngredientList } from '@/components/IngredientList';
 import { RecipeSteps } from '@/components/RecipeSteps';
+import { formatPromotionWindowLabel } from '@/lib/dateUtils';
 import type { Recipe } from '@/types/recipe';
 
 interface RecipeLayoutProps {
   recipe: Recipe;
 }
 
-export const RecipeLayout = ({ recipe }: RecipeLayoutProps) => (
-  <div className="flex w-full flex-col gap-8 lg:flex-row">
-    <div className="lg:w-72 xl:w-80">
-      <IngredientList sections={recipe.ingredients} />
-    </div>
-    <article className="flex-1 space-y-6">
-      <header className="space-y-4">
-        <div className="space-y-2">
-          <div className="flex items-center justify-between gap-3">
-            <p className="text-sm uppercase tracking-wide text-slate-500">
-              {new Date(recipe.createdAt).toLocaleDateString()}
-            </p>
-            {recipe.linkClickable ? (
-              <a
-                href={recipe.linkClickable}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-semibold uppercase tracking-wide text-brand-dark hover:underline"
-              >
-                letak
-              </a>
+export const RecipeLayout = ({ recipe }: RecipeLayoutProps) => {
+  const promotionWindowLabel =
+    formatPromotionWindowLabel({
+      start: recipe.promotionStartDate,
+      end: recipe.promotionEndDate,
+      fallback: recipe.createdAt,
+    }) ?? '–';
+
+  return (
+    <div className="flex w-full flex-col gap-8 lg:flex-row">
+      <div className="lg:w-72 xl:w-80">
+        <IngredientList sections={recipe.ingredients} />
+      </div>
+      <article className="flex-1 space-y-6">
+        <header className="space-y-4">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-sm uppercase tracking-wide text-slate-500">
+                {promotionWindowLabel}
+              </p>
+              {recipe.linkClickable ? (
+                <a
+                  href={recipe.linkClickable}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-semibold uppercase tracking-wide text-brand-dark hover:underline"
+                >
+                  letak
+                </a>
+              ) : null}
+            </div>
+            <h1 className="text-3xl font-bold text-slate-900 lg:text-4xl">{recipe.title}</h1>
+            {recipe.summary ? (
+              <p className="text-lg text-slate-600">{recipe.summary}</p>
             ) : null}
           </div>
-          <h1 className="text-3xl font-bold text-slate-900 lg:text-4xl">{recipe.title}</h1>
-          {recipe.summary ? (
-            <p className="text-lg text-slate-600">{recipe.summary}</p>
+          {recipe.heroImageUrl ? (
+            <div className="mx-auto flex w-fit justify-center overflow-hidden rounded-3xl border border-slate-200 shadow-lg">
+              <img
+                src={recipe.heroImageUrl}
+                alt={recipe.title}
+                className="max-h-80 max-w-full object-contain"
+              />
+            </div>
           ) : null}
-        </div>
-        {recipe.heroImageUrl ? (
-          <div className="mx-auto flex w-fit justify-center overflow-hidden rounded-3xl border border-slate-200 shadow-lg">
-            <img
-              src={recipe.heroImageUrl}
-              alt={recipe.title}
-              className="max-h-80 max-w-full object-contain"
-            />
-          </div>
-        ) : null}
-        {recipe.meta ? <RecipeMeta meta={recipe.meta} /> : null}
-      </header>
-      <section aria-label="Preparation steps">
-        <h2 className="mb-4 text-xl font-semibold text-slate-800">Postup přípravy</h2>
-        <RecipeSteps steps={recipe.steps} />
-      </section>
-    </article>
-  </div>
-);
+          {recipe.meta ? <RecipeMeta meta={recipe.meta} /> : null}
+        </header>
+        <section aria-label="Preparation steps">
+          <h2 className="mb-4 text-xl font-semibold text-slate-800">Postup přípravy</h2>
+          <RecipeSteps steps={recipe.steps} />
+        </section>
+      </article>
+    </div>
+  );
+};
 
 interface RecipeMetaProps {
   meta: NonNullable<Recipe['meta']>;

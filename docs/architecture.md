@@ -15,7 +15,7 @@ Routes
 
 Data Flow
 - Hooks in `src/hooks` wrap shared TanStack Query configs from `src/lib/recipesApi`.
-- When Supabase env vars are present the client fetches live data from the Supabase stack running at `http://10.0.0.188:8000`.
+- When Supabase env vars are present the client fetches live data from the Supabase stack running at `https://supabase.jakubdolenek.xyz`.
 - Without Supabase the API layer returns structured mock data (`src/lib/mockData.ts`) so pages remain functional offline.
 - Query keys are defined in `src/lib/queryKeys` to keep cache keys consistent across hooks.
 - `src/pages/LatestRecipePage.tsx`, `src/pages/RecipeArchivePage.tsx`, and `src/pages/RecipeDetailPage.tsx` compose the data hooks with presentation components so live recipes surface automatically once Supabase responds.

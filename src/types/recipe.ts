@@ -36,6 +36,8 @@ export interface Recipe {
   heroImageUrl?: string;
   createdAt: string;
   updatedAt?: string;
+  promotionStartDate?: string;
+  promotionEndDate?: string;
   linkClickable?: string;
   ingredients: IngredientSection[];
   steps: RecipeStep[];
@@ -44,5 +46,13 @@ export interface Recipe {
 
 export type RecipeListItem = Pick<
   Recipe,
-  'id' | 'title' | 'slug' | 'createdAt' | 'summary' | 'heroImageUrl' | 'linkClickable'
+  | 'id'
+  | 'title'
+  | 'slug'
+  | 'createdAt'
+  | 'promotionStartDate'
+  | 'promotionEndDate'
+  | 'summary'
+  | 'heroImageUrl'
+  | 'linkClickable'
 >;

@@ -9,7 +9,7 @@ export const NotFoundPage = () => (
     </p>
     <div className="flex flex-col gap-2 sm:flex-row">
       <Link to="/" className="rounded-full bg-brand-dark px-5 py-2 text-sm font-semibold text-white shadow hover:bg-brand">
-        Nejnovější recept
+        Překvap mě
       </Link>
       <Link to="/recipes" className="rounded-full border border-brand-dark px-5 py-2 text-sm font-semibold text-brand-dark hover:bg-brand-light/30">
         Archiv receptů

@@ -1,8 +1,16 @@
-import { RecipeLayout } from '@/components/RecipeLayout';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLatestRecipe } from '@/hooks/useLatestRecipe';
 
 export const LatestRecipePage = () => {
+  const navigate = useNavigate();
   const { data, isLoading, isError, error } = useLatestRecipe();
+
+  useEffect(() => {
+    if (data?.slug) {
+      navigate('/recipes/' + data.slug, { replace: true });
+    }
+  }, [data?.slug, navigate]);
 
   if (isLoading) {
     return <RecipeSkeleton />;
@@ -17,7 +25,7 @@ export const LatestRecipePage = () => {
     );
   }
 
-  return <RecipeLayout recipe={data} />;
+  return <RedirectNotice />;
 };
 
 const RecipeSkeleton = () => (
@@ -39,5 +47,12 @@ const RecipeSkeleton = () => (
         </div>
       </div>
     </div>
+  </div>
+);
+
+const RedirectNotice = () => (
+  <div className="mx-auto w-full max-w-xl rounded-2xl border border-slate-200 bg-white p-6 text-center">
+    <p className="text-base font-semibold text-slate-700">Načítám překvapení…</p>
+    <p className="mt-2 text-sm text-slate-500">Za malou chvilku vás přesměrujeme na vybraný recept.</p>
   </div>
 );

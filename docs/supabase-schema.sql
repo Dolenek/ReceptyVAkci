@@ -8,6 +8,8 @@ create table if not exists public.recipes (
   ingredients jsonb not null default '[]'::jsonb,
   steps jsonb not null default '[]'::jsonb,
   meta jsonb,
+  start_akce timestamp with time zone,
+  konec_akce timestamp with time zone,
   created_at timestamp with time zone not null default now(),
   updated_at timestamp with time zone not null default now()
 );
@@ -16,7 +18,19 @@ create table if not exists public.recipes (
 -- insert into public.recipes (title, slug, summary, hero_image_url, ingredients, steps, meta) values (...);
 
 -- seeded development recipe for reference
-insert into public.recipes (id, title, slug, summary, hero_image_url, created_at, ingredients, steps, meta)
+insert into public.recipes (
+  id,
+  title,
+  slug,
+  summary,
+  hero_image_url,
+  created_at,
+  start_akce,
+  konec_akce,
+  ingredients,
+  steps,
+  meta
+)
 values (
   '21dfec83-1d85-4f23-b872-5f05a8b1c5c1',
   'Garden Herb Focaccia',
@@ -24,6 +38,8 @@ values (
   'Airy focaccia topped with rosemary, thyme, and flaked salt.',
   'https://images.unsplash.com/photo-1604908177729-88468b23f888?auto=format&fit=crop&w=1200&q=80',
   '2024-07-05T10:00:00Z',
+  '2024-07-01T00:00:00Z',
+  '2024-07-07T23:59:59Z',
   '[
     {
       "id": "dough",

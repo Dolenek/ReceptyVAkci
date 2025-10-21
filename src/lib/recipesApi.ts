@@ -1,3 +1,4 @@
+import { isDateWithinWindow } from '@/lib/dateUtils';
 import { mockLatestRecipe, mockRecipeArchive } from '@/lib/mockData';
 import { queryKeys } from '@/lib/queryKeys';
 import { supabase, isSupabaseConfigured } from '@/lib/supabaseClient';
@@ -20,6 +21,8 @@ type RecipeRow = {
   hero_image_url?: string | null;
   created_at: string;
   updated_at?: string | null;
+  start_akce?: string | null;
+  konec_akce?: string | null;
   link_clickable?: string | null;
   ingredients: IngredientSection[] | null;
   steps: RecipeStep[] | null;
@@ -34,6 +37,8 @@ const toRecipe = (row: RecipeRow): Recipe => ({
   heroImageUrl: row.hero_image_url ?? undefined,
   createdAt: row.created_at,
   updatedAt: row.updated_at ?? undefined,
+  promotionStartDate: row.start_akce ?? undefined,
+  promotionEndDate: row.konec_akce ?? undefined,
   linkClickable: row.link_clickable ?? undefined,
   ingredients: enrichSections(row.ingredients ?? []),
   steps: normaliseSteps(row.steps ?? []),
@@ -60,9 +65,49 @@ const enrichSections = (sections: IngredientSection[]): IngredientSection[] =>
 const normaliseSteps = (steps: RecipeStep[]): RecipeStep[] =>
   [...steps].sort((a, b) => a.order - b.order);
 
+const pickRandom = <T>(items: T[]): T => items[Math.floor(Math.random() * items.length)];
+
+const selectRandomActiveRecipe = (recipes: Recipe[], referenceDate: Date): Recipe | null => {
+  const activeRecipes = recipes.filter((recipe) =>
+    isDateWithinWindow(referenceDate, recipe.promotionStartDate, recipe.promotionEndDate),
+  );
+
+  if (activeRecipes.length === 0) {
+    return null;
+  }
+
+  return pickRandom(activeRecipes);
+};
+
 export const fetchLatestRecipe = async (): Promise<Recipe> => {
+  const referenceDate = new Date();
+
   if (!isSupabaseConfigured || !supabase) {
-    return mockLatestRecipe;
+    return selectRandomActiveRecipe(mockRecipeArchive, referenceDate) ?? mockLatestRecipe;
+  }
+
+  const nowIso = referenceDate.toISOString();
+
+  const { data: activeData, error: activeError } = await supabase
+    .from('recipes')
+    .select('*')
+    .lte('start_akce', nowIso)
+    .gte('konec_akce', nowIso)
+    .not('start_akce', 'is', null)
+    .not('konec_akce', 'is', null)
+    .returns<RecipeRow[]>();
+
+  if (activeError) {
+    console.warn('[recipesApi] Failed to load active promotion recipes', activeError);
+  }
+
+  const activeRecipe = selectRandomActiveRecipe(
+    (activeData ?? []).map(toRecipe),
+    referenceDate,
+  );
+
+  if (activeRecipe) {
+    return activeRecipe;
   }
 
   const { data, error } = await supabase
@@ -74,7 +119,7 @@ export const fetchLatestRecipe = async (): Promise<Recipe> => {
 
   if (error || !data) {
     console.warn('[recipesApi] Falling back to mock latest recipe', error);
-    return mockLatestRecipe;
+    return selectRandomActiveRecipe(mockRecipeArchive, referenceDate) ?? mockLatestRecipe;
   }
 
   return toRecipe(data);
@@ -113,6 +158,8 @@ export const fetchRecipeArchive = async (page = 1): Promise<RecipeArchiveRespons
         summary: recipe.summary,
         heroImageUrl: recipe.heroImageUrl,
         createdAt: recipe.createdAt,
+        promotionStartDate: recipe.promotionStartDate,
+        promotionEndDate: recipe.promotionEndDate,
         linkClickable: recipe.linkClickable,
       };
       return listItem;

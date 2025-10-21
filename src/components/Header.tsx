@@ -14,7 +14,7 @@ export const Header = () => (
       </NavLink>
       <nav className="flex items-center gap-2">
         <NavLink to="/" className={linkClass} end>
-          Nejnovější recept
+          Překvap mě
         </NavLink>
         <NavLink to="/recipes" className={linkClass}>
           Archiv receptů

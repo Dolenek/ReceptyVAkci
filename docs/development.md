@@ -25,7 +25,7 @@ Supabase Setup Checklist
 - Optional: add Row Level Security policies for fine grained control when you introduce auth.
 
 Troubleshooting
-- If data does not load, verify the Supabase stack is reachable on `http://10.0.0.188:8000` and that `.env` contains the matching anon key. The UI automatically falls back to mock data but logs a warning (`[recipesApi] Falling back to mock…`).
+- If data does not load, verify the Supabase stack is reachable on `https://supabase.jakubdolenek.xyz` and that `.env` contains the matching anon key. The UI automatically falls back to mock data but logs a warning (`[recipesApi] Falling back to mock…`).
 - When Tailwind classes seem missing, restart the development server to rebuild the PostCSS pipeline.
 - For stubborn test failures caused by cached queries, clear node_modules/.vite or run Vitest with the --runInBand flag for debugging.
 
@@ -33,4 +33,5 @@ Live data checklist
 - API layer lives in `src/lib/recipesApi.ts`; every fetch first checks `isSupabaseConfigured`. Missing env vars or network failures trigger the mock fallback.
 - Query keys reside in `src/lib/queryKeys.ts` and are referenced by hooks under `src/hooks/` such as `useLatestRecipe`, `useRecipeArchive`, and `useRecipeBySlug`.
 - UI entry points: `src/pages/LatestRecipePage.tsx` renders the latest recipe via `RecipeLayout`, while `src/pages/RecipeArchivePage.tsx` and `src/pages/RecipeDetailPage.tsx` surface the archive grid and slug-based details.
-- Use `curl "http://10.0.0.188:8000/rest/v1/recipes?select=title,slug" -H "apikey: $VITE_SUPABASE_ANON_KEY"` to confirm the Supabase REST layer responds before debugging the frontend.
+- Use `curl "https://supabase.jakubdolenek.xyz/rest/v1/recipes?select=title,slug" -H "apikey: $VITE_SUPABASE_ANON_KEY"` to confirm the Supabase REST layer responds before debugging the frontend.
+- Promotion window: when recipes expose `start_akce` and `konec_akce`, the frontend maps them to `promotionStartDate` and `promotionEndDate` for display. Keep `src/lib/mockData.ts` and the Supabase schema aligned when you change these columns. The latest recipe view picks a random recipe whose window covers the current date, so define both timestamps for every active promotion.

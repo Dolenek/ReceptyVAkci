@@ -3,6 +3,8 @@
   "slug": "jablecny-kolac-s-drobenkou",
   "summary": "Šťavnatý jablečný koláč s voňavou skořicí a křupavou drobenkou navrchu.",
   "link_clickable": "https://example.com/letak/jablecny-kolac",
+  "start_akce": "2024-07-01T00:00:00Z",
+  "konec_akce": "2024-07-07T23:59:59Z",
   "ingredients": [
     {
       "id": "těsto",

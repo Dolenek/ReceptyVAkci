@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
-import type { RenderOptions } from '@testing-library/react';
+import type { RenderOptions, RenderResult } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import type { ReactElement, ReactNode } from 'react';
 
@@ -27,7 +27,7 @@ const Providers = ({ children, client, route = '/' }: { children: ReactNode; cli
   );
 };
 
-export const renderWithProviders = (ui: ReactElement, options: ProvidersOptions = {}) => {
+export const renderWithProviders = (ui: ReactElement, options: ProvidersOptions = {}): RenderResult => {
   const { route, client, ...renderOptions } = options;
   return render(ui, {
     wrapper: ({ children }) => (

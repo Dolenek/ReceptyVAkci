@@ -8,6 +8,8 @@ export const mockLatestRecipe: Recipe = {
   slug: 'citrus-bundt-cake',
   summary: 'Bright and fluffy bundt cake with hints of lemon and orange zest.',
   createdAt: MOCK_CREATED_AT,
+  promotionStartDate: '2024-03-11T00:00:00Z',
+  promotionEndDate: '2024-03-17T23:59:59Z',
   linkClickable: 'https://example.com/mock-letak-citrus-bundt-cake',
   ingredients: [
     {
@@ -65,6 +67,8 @@ export const mockRecipeArchive: Recipe[] = [
     slug: 'smoked-paprika-goulash',
     summary: 'Hearty beef goulash with layers of smoked paprika and caraway.',
     createdAt: '2024-02-28T09:30:00Z',
+    promotionStartDate: '2024-02-26T00:00:00Z',
+    promotionEndDate: '2024-03-03T23:59:59Z',
     linkClickable: 'https://example.com/mock-letak-smoked-paprika-goulash',
     ingredients: [
       {
